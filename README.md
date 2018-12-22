@@ -53,8 +53,11 @@ __Quick Start__
 * There is a couple more command-line switches to make building and deploying a bit easier, like:
 
   `premake5 build` builds the local Notepad++ and the plugins
+  
   `premake5 package-plugins` zips all built plugins for easier redistribution
+  
   `premake5 make-release` shortcut for running 'vs2015', 'build' and 'package-plugins' in succession
+  
   `premake5 local-install` deploys built and packaged plugins for use by the installed Notepad++
 
   For further documentation of command-line actions/options run
