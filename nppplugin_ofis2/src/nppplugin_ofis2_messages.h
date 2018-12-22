@@ -1,0 +1,5 @@
+#pragma once
+
+#define NPPM_OFIS2_BASE						10
+
+#define NPPM_OFIS_ON_SEARCH_RESPONSE		NPPM_OFIS2_BASE

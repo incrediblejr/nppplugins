@@ -1,0 +1,4 @@
+{
+	"default" : [ "source_dir", "data_dir" ],
+	"custom" : [ "custom_exe", "custom_other" ]
+}

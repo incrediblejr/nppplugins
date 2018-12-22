@@ -1,0 +1,38 @@
+[ documentation ]
+
+Open File In Solution(OFIS) needs a solution, which defines what directories and which files to include. The solutions is created and setup
+in the SolutionHubUI.
+
+If you have any problem with setting up a solution please contact me (information below) and I will provide better instructions on the webpage.
+
+Checkout http://npp.incrediblejunior.com/ for tips and tricks to get you started.
+
+[ searching ]
+
+Searching has a couple of keywords, namely '\' and '-'. The default search is 'token' based and every space in the search string makes a new token.
+The tokens is then searched in the filename(usually, more on that later) and if the string to be seached has all tokens IN ORDER that was defined by the search,
+we have a match.
+
+Examples (of the basic search) :
+
+Lets say we have 4 files in our directory, foobar.h, foobar.cpp, barfoo.h and barfoo.cpp.
+
+Search strings :
+'foo' - will match all files as 'foo' is present in all files.
+'foo cpp' - will match foobar.cpp and barfoo.cpp
+'foo bar' - will match foobar.h and foobar.cpp.
+
+Now lets explain the keywords.
+If the token starts with a '\', it will signal that the whole path(and filename ofcourse) will be used for searching.
+You only have to include this once per search string so there is no point of searching like '\svn \work foo bar' (this could also be formatted like '\svn\work foo bar'.
+The searchstring just explained will search in your (I imagine) folders 'svn\work' for files that includes 'foo' and 'bar'.
+
+If the token starts with a '-' this token is used to exclude tokens in your searchstring. It does *NOT* respect order, in other words if the token that follows the '-'
+is present in the filename(or path+filename) it will NOT be included in the result.
+So there is no difference between the searchstrings : 'foo -cpp' and '-cpp foo' (if you see it from the results point of view).
+
+[ contact information ]
+
+Please visit https://github.com/incrediblejr/nppplugins for latest information.
+
+email : fredrik (at) incrediblejunior (dot) com

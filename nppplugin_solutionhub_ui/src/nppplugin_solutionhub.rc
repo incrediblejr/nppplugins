@@ -1,0 +1,125 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Swedish (Sweden) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_SVE)
+LANGUAGE LANG_SWEDISH, SUBLANG_SWEDISH
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SOLUTIONHUB DIALOGEX 0, 0, 672, 425
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SolutionHub"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_COMBO_TEMPLATES,307,198,48,12,CBS_DROPDOWN | CBS_SORT | NOT WS_VISIBLE | WS_DISABLED | WS_VSCROLL
+    GROUPBOX        "",IDC_TEMPLATE_FRAME,17,306,508,101
+    PUSHBUTTON      "Save solution...",IDC_BUTTON_SAVE_PROJECT,566,120,86,14
+    PUSHBUTTON      "Add new field...",IDC_BUTTON_ADD_GENERIC_FIELD,578,311,74,14
+    PUSHBUTTON      "Clear generic data...",IDC_BUTTON_CLEAR_GENERIC,561,365,91,14
+    PUSHBUTTON      "Open directory...",IDC_BUTTON_OPENDIRECTORY,441,196,91,14,NOT WS_VISIBLE | WS_DISABLED
+    LTEXT           "Template",IDC_TEXT_TEMPLATE,379,199,55,8,NOT WS_VISIBLE | WS_DISABLED
+    GROUPBOX        "",IDC_FOLDERS_FRAME,17,158,641,108
+    GROUPBOX        "Directories",IDC_GB_DIRECTORIES,7,140,658,152
+    GROUPBOX        "Attributes",IDC_GB_ATTRIBUTES,7,295,658,123
+    GROUPBOX        "Solutions",IDC_GB_SOLUTIONS,7,7,658,96
+    GROUPBOX        "Solution",IDC_GB_SOLUTION,7,109,658,309
+    LTEXT           "Name",IDC_TEXT_SOLUTION_NAME,17,125,19,8
+    EDITTEXT        IDC_EDIT_SOLUTION_NAME,60,123,205,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Add new field...",IDC_BUTTON_ADD_SOLUTIONDIRECTORY,577,271,75,14
+    GROUPBOX        "",IDC_FRAME_SOLUTIONS,17,19,535,64,NOT WS_VISIBLE
+    PUSHBUTTON      "Remove field...",IDC_BUTTON_SOLUTION_REMOVE_DIRECTORY,490,270,72,14
+    PUSHBUTTON      "Save connections...",IDC_BUTTON_SAVE_CONNECTIONS,576,43,76,14
+    PUSHBUTTON      "Delete solution...",IDC_BUTTON_DELETE_SOLUTION,576,63,76,14,WS_DISABLED
+    PUSHBUTTON      "New solution...",IDC_BUTTON_NEW_SOLUTION,576,22,76,14
+    PUSHBUTTON      "Remove field...",IDC_BUTTON_REMOVE_TEMPLATEFIELD,578,344,74,14,NOT WS_TABSTOP
+    LTEXT           "",IDC_TEXT_CONNECTIONS,19,86,534,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_SOLUTIONHUB, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 665
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 418
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_KABINET             ICON                    "kabinett.ico"
+
+#endif    // Swedish (Sweden) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

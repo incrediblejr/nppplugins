@@ -1,0 +1,25 @@
+[ info ]
+
+This plugin uses TortoiseSVN(http://tortoisesvn.tigris.org/) and in order to use this plugin this has to be installed.
+
+If you have TortoiseSVN installed and you get an error indicating that the plugin initialization failed to find
+the install directy of TortoiseSVN then you manually have to point out where TortoiseSVN is installed.
+To do this, open the config file of this plugin (Plugin menu->Tortoise SVN->Open config file) and follow the
+instruction in the configuration file.
+
+[ basic instructions ]
+
+All file commands should work 'out-of-the-box' but in order to use the 'project' commands you have to
+do a little work.
+
+If you want the project/solution aspect of the Tortoise SVN plugin to work you need to enter the root directory
+of you project/solution as a attribute in the SolutionHub. The attributes name is 'svn_root_dir' and should
+be the path to the root of you SVN trunk.
+
+NOTE : You ALSO have to setup a connection in the SolutionHub to this plugin(tsvn).
+
+[ contact information ]
+
+Please visit http://npp.incrediblejunior.com/ or https://github.com/incrediblejr/nppplugins for further documentation.
+
+email : fredrik (at) incrediblejunior (dot) com

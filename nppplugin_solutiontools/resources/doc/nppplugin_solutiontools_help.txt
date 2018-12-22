@@ -1,0 +1,13 @@
+[ basic info ]
+
+'Ctrl+Left mouse click' is a shortcut for 'Open document'.
+
+Documentation of how 'Switch file' works can be found in the settings file.
+
+To open the settingsfile use 'Plugin Menu->Solution Tools->Open settings'.
+
+[ contact information ]
+
+Please visit http://npp.incrediblejunior.com/ or https://github.com/incrediblejr/nppplugins for further documentation.
+
+email : fredrik (at) incrediblejunior (dot) com

@@ -1,0 +1,13 @@
+{
+	"solution" :
+	{
+		"test" : [ "svn", "ofis" ]
+	},
+
+	"alias" :
+	{
+		"svn" : "test",
+		"ofis" : "test"
+	}
+
+}

@@ -1,0 +1,22 @@
+{
+	"solutions" : {
+		"test" : {
+			"directories" : [
+				{
+					"path" : "c:\\",
+					"recursive" : true,
+					"include_filter" : ".lua.other"
+				},
+				{
+					"path" : "d:\\",
+					"monitored" : true,
+					"exclude_filter" : ".unit.dds"
+				}
+			],
+			"attributes" : {
+				"attrib_key" : "attrib_val",
+				"attrib_key2" : "attrib_val2"
+			}
+		}
+	}
+}

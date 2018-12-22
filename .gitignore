@@ -1,0 +1,8 @@
+.build/
+.releases/
+scintilla/
+PowerEditor/
+nppplugin_shared/nppplugin_solutionhub_interface/
+
+#-- Premake
+premake5.exe
