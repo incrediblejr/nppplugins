@@ -274,7 +274,7 @@ local function sevenzip_available() return os_capture(Q(_OPTIONS["sevenzippath"]
 -- '-bsp0' -> disable progress information stream messages
 local sevenzip_disable_stream_switches = "-bso0 -bsp0"
 local function sevenzip_has_output_stream_switch()
-	return not os_capture(Q(_OPTIONS["sevenzippath"]).." --bso0"):lower():find("unknown switch")
+	return false
 end
 
 local function sevenzip_get_available_disable_stream_switches()
