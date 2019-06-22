@@ -242,7 +242,7 @@ end
 local make_release_action_name = "make-release"
 newaction {
 	trigger		= make_release_action_name,
-	description	= [[Shortcut for running actions 'vs2015', 'build' and 'package-plugins' in succession
+	description	= [[Shortcut for running actions 'vs2017', 'build' and 'package-plugins' in succession
 
 ${spaces}NB: if built plugins should be tagged with a version then also specify '--plugin-version'
 	]]
@@ -282,7 +282,7 @@ local function sevenzip_get_available_disable_stream_switches()
 end
 
 if _ACTION == "help" then
-	local keep_actions = { ["vs2015"]=true }
+	local keep_actions = { ["vs2017"]=true }
 
 	local alloptions = premake and premake.option and premake.option.list or {}
 	for k, v in pairs(alloptions) do
@@ -309,7 +309,7 @@ PLUGIN_VERSION = _OPTIONS["plugin-version"]
 local settings = {
 	{
 		arch = "x86",
-		archswitch = "",
+		archswitch = "x86",
 		buildfolderprefix = "",
 
 		devenv_arch = "Win32",
@@ -593,7 +593,7 @@ if _ACTION == "setup" then
 		local scilexer_buildbatfile_template = [[
 @ECHO OFF
 setlocal
-set VCVARS_PATH=%VS140COMNTOOLS%\..\..\VC
+set VCVARS_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 
 call "%VCVARS_PATH%\vcvarsall.bat" ${archswitch}
 ${missingrcfix}
@@ -650,7 +650,7 @@ end
 
 if _ACTION == "build" then
 	if not file_exists(".build/nppplugins.sln") then
-		print "ERROR: 'build' was requested but solution-files has not been generated yet, please run 'premake5 vs2015' first."
+		print "ERROR: 'build' was requested but solution-files has not been generated yet, please run 'premake5 vs2017' first."
 		return
 	end
 
@@ -659,7 +659,7 @@ if _ACTION == "build" then
 local buildtemplate=[[
 @ECHO OFF
 setlocal
-set VCVARS_PATH=%VS140COMNTOOLS%\..\..\VC
+set VCVARS_PATH=%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 
 call "%VCVARS_PATH%\vcvarsall.bat" ${archswitch}
 ${missingrcfix}
@@ -860,7 +860,7 @@ if _ACTION == make_release_action_name then
 	until true end
 
 	do
-		local current_action = "vs2015"
+		local current_action = "vs2017"
 		printf("'%s' running action '%s'", make_release_action_name, current_action)
 		-- first clean and generate project files
 		-- as the both REVISION_HASH and PLUGIN_VERSION is set in the project files

@@ -1,0 +1,22 @@
+image: Visual Studio 2017
+
+
+install:
+  # Download Premake
+  - ps: Start-FileDownload 'https://github.com/premake/premake-core/releases/download/v5.0.0-alpha14/premake-5.0.0-alpha14-windows.zip' 'premake.zip'
+  
+  # Extract it in-place; premake5.exe is at the top level.
+  - 7z x premake.zip
+
+  - cd "%APPVEYOR_BUILD_FOLDER%" && "premake5.exe" setup
+
+  # Generate solution files using premake.
+  - cd "%APPVEYOR_BUILD_FOLDER%" && "premake5.exe" vs2017
+
+build_script:
+    - cd "%APPVEYOR_BUILD_FOLDER%" && "premake5.exe" build
+
+after_build:
+    - cd "%APPVEYOR_BUILD_FOLDER%" && "premake5.exe" package-plugins
+
+
