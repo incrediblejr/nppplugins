@@ -930,38 +930,39 @@ if _ACTION == "local-install" then
 	printf("'%s' with version:%s", _ACTION, PLUGIN_VERSION)
 	if not sevenzip_available() then
 		print "Local install of built plugins requested but 7-zip if not available, please check '--sevenzippath' option"
-	else
-		local sevenzip = Q(FSLASH(_OPTIONS["sevenzippath"]))
-		local arch = _OPTIONS["install-arch"]
-		local basepath = _OPTIONS["install-basepath"]
-		local version = PLUGIN_VERSION
-		local release_folder = sprintf(".releases/%s/%s", arch, version)
+		return
+	end
 
-		if not os.isdir(release_folder) then
-			printf("'%s' FAILED, '%s' is not a folder, please verify that target is built and the correct '--plugin-version' is used.", _ACTION, release_folder)
-			return
-		end
+	local sevenzip = Q(FSLASH(_OPTIONS["sevenzippath"]))
+	local arch = _OPTIONS["install-arch"]
+	local basepath = _OPTIONS["install-basepath"]
+	local version = PLUGIN_VERSION
+	local release_folder = sprintf(".releases/%s/%s", arch, version)
 
-		local stream_switches = sevenzip_get_available_disable_stream_switches()
-		local pluginspath = basepath.."/Notepad++/plugins"
+	if not os.isdir(release_folder) then
+		printf("'%s' FAILED, '%s' is not a folder, please verify that target is built and the correct '--plugin-version' is used.", _ACTION, release_folder)
+		return
+	end
 
-		for _, project_settings in ipairs(plugins) do
-			local plugin_name = project_settings.name
+	local stream_switches = sevenzip_get_available_disable_stream_switches()
+	local pluginspath = basepath.."/Notepad++/plugins"
 
-			-- '-y' -> Assume Yes on all queries
-			local command = [[${sevenzip} x ${name}.zip -y ${stream_switches} -o${output_folder}]]
-			local t = {
-				name = path.join(release_folder, plugin_name),
-				sevenzip = sevenzip,
-				output_folder = Q(ESLASH(pluginspath)),
-				stream_switches = stream_switches
-			}
+	for _, project_settings in ipairs(plugins) do
+		local plugin_name = project_settings.name
 
-			local fcommand = interp(command, t)
+		-- '-y' -> Assume Yes on all queries
+		local command = [[${sevenzip} x ${name}.zip -y ${stream_switches} -o${output_folder}]]
+		local t = {
+			name = path.join(release_folder, plugin_name),
+			sevenzip = sevenzip,
+			output_folder = Q(ESLASH(pluginspath)),
+			stream_switches = stream_switches
+		}
 
-			-- http://lua-users.org/lists/lua-l/2013-11/msg00367.html
-			os.execute("type NUL && "..fcommand)
-		end
+		local fcommand = interp(command, t)
+
+		-- http://lua-users.org/lists/lua-l/2013-11/msg00367.html
+		os.execute("type NUL && "..fcommand)
 	end
 end
 
