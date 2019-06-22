@@ -50,9 +50,9 @@ __Quick Start__
 
   Please check the output as this requires that `git` is accessible from the command-line, this can set by `--gitpath=PATH` command-line option if not.
 
-* Generate Visual Studio 2015 project files by running:
+* Generate Visual Studio 2017 project files by running:
 
-  `premake5 vs2015`
+  `premake5 vs2017`
 
   now the solution files can be found in the `.build` folder and can be opened by
 
@@ -64,7 +64,7 @@ __Quick Start__
   
   `premake5 package-plugins` zips all built plugins for easier redistribution
   
-  `premake5 make-release` shortcut for running 'vs2015', 'build' and 'package-plugins' in succession
+  `premake5 make-release` shortcut for running 'vs2017', 'build' and 'package-plugins' in succession
   
   `premake5 local-install` deploys built and packaged plugins for use by the installed Notepad++
 
