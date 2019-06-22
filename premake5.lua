@@ -966,6 +966,11 @@ if _ACTION == "local-install" then
 end
 
 if _ACTION == make_release_action_name then
+	local failed_version = make_fileversion(PLUGIN_VERSION, true)
+	if failed_version then
+		printf("'%s' with version:%s, failed. please verify `--plugin-version`", _ACTION, PLUGIN_VERSION)
+		return
+	end
 	printf("'%s' with version:%s", _ACTION, PLUGIN_VERSION)
 	local org_commandlineargs = {}
 
