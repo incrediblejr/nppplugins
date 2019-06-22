@@ -880,37 +880,45 @@ end
 local function package_plugins(version, sevenzippath)
 	if not sevenzip_available() then
 		print "Package of built plugins requested but 7-zip if not available, please check '--sevenzippath' option"
-	else
-		local sevenzip = Q(FSLASH(sevenzippath))
-		local stream_switches = sevenzip_get_available_disable_stream_switches()
+		return
+	end
 
-		for _, arch in ipairs { "x86", "x64" } do
-			local release_folder = sprintf(".releases/%s/%s", arch, version)
-			os.execute("{RMDIR} "..release_folder)
-			mkdir_recursive(release_folder)
-			for _, c in ipairs { "release" } do
-				for _, project_settings in ipairs(plugins) do repeat
-					local plugin_name = project_settings.name
-					local build_folder = ROOT_DIR..buildfolder_by_arch_config(arch, c).."/plugins/"..plugin_name
-					-- NTS: append [[/*.*]] to get rid of the plugin_name-folder
+	local sevenzip = Q(FSLASH(sevenzippath))
+	local stream_switches = sevenzip_get_available_disable_stream_switches()
 
-					local exclude = [[-xr!*.pdb -xr!*.lib -xr!*.ilk -xr!*.exp]]
-					local command = [[${sevenzip} a ${name}.zip ${stream_switches} -r ${folder} ${exclude}]]
-					local t = {
-						name = path.join(release_folder, plugin_name),
-						sevenzip = sevenzip,
-						folder = Q(ESLASH(build_folder)),
-						exclude = exclude,
-						stream_switches=stream_switches
-					}
+	for _, arch in ipairs { "x86", "x64" } do
+		local release_folder = sprintf(".releases/%s/%s", arch, version)
+		os.execute("{RMDIR} "..release_folder)
+		mkdir_recursive(release_folder)
+		for _, c in ipairs { "release" } do
+			for _, project_settings in ipairs(plugins) do
+				local plugin_name = project_settings.name
+				local build_folder = ROOT_DIR..buildfolder_by_arch_config(arch, c).."/plugins/"..plugin_name
+				-- NTS: append [[/*.*]] to get rid of the plugin_name-folder
 
-					local fcommand = interp(command, t)
+				local exclude = [[-xr!*.pdb -xr!*.lib -xr!*.ilk -xr!*.exp]]
+				local command = [[${sevenzip} a ${name}.zip ${stream_switches} -r ${folder} ${exclude}]]
+				local t = {
+					name = path.join(release_folder, plugin_name),
+					sevenzip = sevenzip,
+					folder = Q(ESLASH(build_folder)),
+					exclude = exclude,
+					stream_switches=stream_switches
+				}
 
-					-- http://lua-users.org/lists/lua-l/2013-11/msg00367.html
-					os.execute("type NUL && "..fcommand)
-				until true end
+				local fcommand = interp(command, t)
+
+				-- http://lua-users.org/lists/lua-l/2013-11/msg00367.html
+				os.execute("type NUL && "..fcommand)
 			end
 		end
+
+		local t = {
+			release_folder = release_folder,
+			sevenzip = sevenzip
+		}
+		local sha256command = interp([[${sevenzip} h -scrcSHA256 ${release_folder}/*.zip > ${release_folder}/sha256_hashes.txt]], t)
+		os.execute("type NUL && "..sha256command)
 	end
 end
 
