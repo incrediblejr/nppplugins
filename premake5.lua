@@ -446,10 +446,129 @@ solution "nppplugins"
 			["Release"] = "Unicode Release",
 		}
 
+local function file_read(file)
+	local f = io.open(file, "rb")
+	if not f then return "" end
+
+	local content = f:read("*all")
+	f:close()
+	return content
+end
+
+local function file_size(filename)
+	local f = assert(io.open(filename, "rb"))
+	local s = assert(f:seek("end"))
+	f:close()
+	return s
+end
+
+local RC_TEMPLATE = [[
+
+#include <Windows.h>
+
+VS_VERSION_INFO     VERSIONINFO
+FILEVERSION         ${version_value_digits}
+PRODUCTVERSION      ${version_value_digits}
+FILEFLAGSMASK       0x3fL
+FILEFLAGS           0
+FILEOS              VOS_NT_WINDOWS32
+FILETYPE            VFT_APP
+FILESUBTYPE         VFT2_UNKNOWN
+
+BEGIN
+   BLOCK   "VarFileInfo"
+   BEGIN
+      VALUE   "Translation",   0x409,   1200
+   END
+   BLOCK   "StringFileInfo"
+   BEGIN
+      BLOCK "040904b0"
+      BEGIN
+         VALUE   "CompanyName", "\0"
+         VALUE   "FileDescription", "Plugin for Notepad++\0"
+         VALUE   "FileVersion", ${version_value_string}
+         VALUE   "InternalName", "${dll_name}\0"
+         VALUE   "LegalCopyright", "\0"
+         VALUE   "OriginalFilename", "${dll_name}\0"
+         VALUE   "ProductName", "${dll_name}\0"
+         VALUE   "ProductVersion", ${version_value_string}
+      END
+   END
+END
+]]
+
+local function cr_lines(s) return s:gsub('\r\n?', '\n') end
+
+local function make_fileversion(plugin_version, is_release)
+	local version_value_string_default = "0.0.0.0"
+	local version_value_t = split(plugin_version, ".")
+
+	local failed = false
+	local nvalues = #version_value_t
+	if nvalues > 4 then
+		failed = true
+	else
+		local nzeros = 4-nvalues
+		for i=1, nzeros do table.insert(version_value_t, "0") end
+
+		for i, value in ipairs(version_value_t) do
+			failed = failed or not tonumber(value)
+		end
+	end
+
+	if failed then
+		--printf("ERROR: failed to make version from `%s`", plugin_version)
+		plugin_version = version_value_string_default
+		version_value_t = split(plugin_version, ".")
+	end
+
+	local version_value_digits = ""
+	for i, d in ipairs(version_value_t) do
+		if i > 1 then
+			version_value_digits = version_value_digits..", "
+		end
+		version_value_digits = version_value_digits..d
+	end
+
+	local version_value_string = sprintf([["%s\0"]], plugin_version)
+
+	failed = failed or (is_release and plugin_version == PLUGIN_VERSION_NON_RELEASE)
+
+	return failed, version_value_string, version_value_digits
+end
+
+local function make_plugin_rc_file(name, plugin_version)
+	assert(plugin_version)
+	local dll_name = name..".dll"
+
+	local dst_folder = name.."/src/"
+	local filename_rc = name..".rc"
+	local filename_rc_template = filename_rc..".template"
+	local fullpath_template = dst_folder..filename_rc_template
+	local template_content = file_read(fullpath_template)
+
+	local _, version_value_string, version_value_digits = make_fileversion(plugin_version, false)
+
+	local T = {
+		version_value_string=version_value_string,
+		version_value_digits=version_value_digits,
+		dll_name=dll_name
+	}
+
+	local rc_content = interp(RC_TEMPLATE, T)
+	local full_rc_content = template_content..rc_content
+
+	local f = assert(io.open(dst_folder..filename_rc, "w"))
+	f:write(cr_lines(full_rc_content))
+	f:close()
+end
+
 function make_plugin(name, project_settings)
 	project_settings = project_settings or {}
 	project_settings.name = name
 	plugins[#plugins+1] = project_settings
+
+	make_plugin_rc_file(name, PLUGIN_VERSION)
 
 	project (name)
 		uuid (os.uuid(name))
