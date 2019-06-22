@@ -3,6 +3,7 @@
 scintilla/
 PowerEditor/
 nppplugin_shared/nppplugin_solutionhub_interface/
+*.rc
 
 #-- Premake
 premake5.exe
