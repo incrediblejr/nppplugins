@@ -894,7 +894,8 @@ local function package_plugins(version, sevenzippath)
 			for _, project_settings in ipairs(plugins) do
 				local plugin_name = project_settings.name
 				local build_folder = ROOT_DIR..buildfolder_by_arch_config(arch, c).."/plugins/"..plugin_name
-				-- NTS: append [[/*.*]] to get rid of the plugin_name-folder
+				-- NTS: by appending [[/*.*]] we will get rid of the top folder named '<plugin_name>'
+				build_folder = build_folder..[[/*.*]]
 
 				local exclude = [[-xr!*.pdb -xr!*.lib -xr!*.ilk -xr!*.exp]]
 				local command = [[${sevenzip} a ${name}_${arch}.zip ${stream_switches} -r ${folder} ${exclude}]]
@@ -956,7 +957,7 @@ if _ACTION == "local-install" then
 		local t = {
 			name = path.join(release_folder, plugin_name),
 			sevenzip = sevenzip,
-			output_folder = Q(ESLASH(pluginspath)),
+			output_folder = Q(ESLASH(pluginspath).."/"..plugin_name),
 			stream_switches = stream_switches,
 			arch = arch
 		}
