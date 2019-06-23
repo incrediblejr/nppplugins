@@ -897,13 +897,14 @@ local function package_plugins(version, sevenzippath)
 				-- NTS: append [[/*.*]] to get rid of the plugin_name-folder
 
 				local exclude = [[-xr!*.pdb -xr!*.lib -xr!*.ilk -xr!*.exp]]
-				local command = [[${sevenzip} a ${name}.zip ${stream_switches} -r ${folder} ${exclude}]]
+				local command = [[${sevenzip} a ${name}_${arch}.zip ${stream_switches} -r ${folder} ${exclude}]]
 				local t = {
 					name = path.join(release_folder, plugin_name),
 					sevenzip = sevenzip,
 					folder = Q(ESLASH(build_folder)),
 					exclude = exclude,
-					stream_switches=stream_switches
+					stream_switches=stream_switches,
+					arch = arch
 				}
 
 				local fcommand = interp(command, t)
@@ -951,12 +952,13 @@ if _ACTION == "local-install" then
 		local plugin_name = project_settings.name
 
 		-- '-y' -> Assume Yes on all queries
-		local command = [[${sevenzip} x ${name}.zip -y ${stream_switches} -o${output_folder}]]
+		local command = [[${sevenzip} x ${name}_${arch}.zip -y ${stream_switches} -o${output_folder}]]
 		local t = {
 			name = path.join(release_folder, plugin_name),
 			sevenzip = sevenzip,
 			output_folder = Q(ESLASH(pluginspath)),
-			stream_switches = stream_switches
+			stream_switches = stream_switches,
+			arch = arch
 		}
 
 		local fcommand = interp(command, t)
