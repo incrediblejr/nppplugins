@@ -1,6 +1,6 @@
 [ info ]
 
-This plugin uses TortoiseSVN(http://tortoisesvn.tigris.org/) and in order to use this plugin this has to be installed.
+This plugin uses TortoiseSVN(https://tortoisesvn.net/) and in order to use this plugin this has to be installed.
 
 If you have TortoiseSVN installed and you get an error indicating that the plugin initialization failed to find
 the install directy of TortoiseSVN then you manually have to point out where TortoiseSVN is installed.

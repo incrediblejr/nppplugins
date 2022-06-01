@@ -227,7 +227,7 @@ namespace {
 	}
 
 	/*
-		http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
+		https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
 
 		/closeonend:0 don't close the dialog automatically
 		/closeonend:1 auto close if no errors
